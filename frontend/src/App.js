@@ -22,21 +22,24 @@ function App() {
 
   const [formData, setFormData] = useState(initialState);
   const [result, setResult] = useState(null);
-  const [probability, setProbability] = useState(null);
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
 
+  // Load prediction history
   useEffect(() => {
     const savedHistory =
       JSON.parse(localStorage.getItem("predictionHistory")) || [];
+
     setHistory(savedHistory);
   }, []);
 
+  // Toggle dark/light mode
   const toggleTheme = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("light-mode");
   };
 
+  // Handle form changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -44,14 +47,17 @@ function App() {
     });
   };
 
+  // Voice output
   const speakResult = (message) => {
     const speech = new SpeechSynthesisUtterance(message);
     speech.lang = "en-US";
     speech.pitch = 1;
     speech.rate = 1;
+
     window.speechSynthesis.speak(speech);
   };
 
+  // Submit prediction
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -92,16 +98,15 @@ function App() {
       const resultCode = Number(data.result_code);
 
       setResult(resultCode);
-      setProbability(null);
       setLoading(false);
 
+      // Save prediction history
       const timestamp = new Date().toLocaleString();
 
       const entry = {
         time: timestamp,
         inputs: { ...formData },
         prediction: resultCode,
-        probability: null,
       };
 
       const updatedHistory = [entry, ...history];
@@ -113,6 +118,7 @@ function App() {
         JSON.stringify(updatedHistory)
       );
 
+      // Voice result
       if (resultCode === 1) {
         speakResult(
           "Warning! High risk of heart disease detected."
@@ -124,17 +130,21 @@ function App() {
       }
     } catch (error) {
       console.error("Prediction error:", error);
+
       setLoading(false);
+      setResult(null);
+
       alert(
         "Unable to connect to the prediction server. Please try again."
       );
     }
   };
 
+  // Reset form
   const handleReset = () => {
     setFormData(initialState);
     setResult(null);
-    setProbability(null);
+    setLoading(false);
   };
 
   return (
@@ -161,6 +171,7 @@ function App() {
 
         <div className="form-grid">
 
+          {/* Age */}
           <div className="form-group">
             <label>
               Age: {formData.age}
@@ -176,6 +187,7 @@ function App() {
             />
           </div>
 
+          {/* Sex */}
           <div className="form-group">
             <label>Sex:</label>
 
@@ -189,6 +201,7 @@ function App() {
             </select>
           </div>
 
+          {/* Chest Pain */}
           <div className="form-group">
             <label>Chest Pain Type:</label>
 
@@ -197,24 +210,14 @@ function App() {
               value={formData.cp}
               onChange={handleChange}
             >
-              <option value="0">
-                Typical Angina
-              </option>
-
-              <option value="1">
-                Atypical Angina
-              </option>
-
-              <option value="2">
-                Non-anginal Pain
-              </option>
-
-              <option value="3">
-                Asymptomatic
-              </option>
+              <option value="0">Typical Angina</option>
+              <option value="1">Atypical Angina</option>
+              <option value="2">Non-anginal Pain</option>
+              <option value="3">Asymptomatic</option>
             </select>
           </div>
 
+          {/* Resting Blood Pressure */}
           <div className="form-group">
             <label>
               Resting BP: {formData.trestbps}
@@ -230,6 +233,7 @@ function App() {
             />
           </div>
 
+          {/* Cholesterol */}
           <div className="form-group">
             <label>
               Cholesterol: {formData.chol}
@@ -245,6 +249,7 @@ function App() {
             />
           </div>
 
+          {/* Maximum Heart Rate */}
           <div className="form-group">
             <label>
               Max Heart Rate: {formData.thalach}
@@ -260,6 +265,7 @@ function App() {
             />
           </div>
 
+          {/* ST Depression */}
           <div className="form-group">
             <label>
               ST Depression: {formData.oldpeak}
@@ -278,6 +284,7 @@ function App() {
 
         </div>
 
+        {/* Buttons */}
         <div className="form-buttons">
 
           <button
@@ -285,7 +292,7 @@ function App() {
             className="predict-btn"
             disabled={loading}
           >
-            {loading ? "⏳ Analyzing..." : "🔍 Predict"}
+            {loading ? "⏳ Predicting..." : "🔍 Predict"}
           </button>
 
           <button
@@ -313,34 +320,33 @@ function App() {
             result === 1 ? "danger" : "safe"
           }`}
         >
-          <h2>
-            {result === 1
-              ? "⚠️ High Risk of Heart Disease"
-              : "✅ Low Risk of Heart Disease"}
-          </h2>
+          {result === 1 ? (
+            <>
+              <h2>
+                ⚠️ High Risk of Heart Disease
+              </h2>
 
-          {probability !== null && (
-            <div className="progress-bar">
-              <div
-                className="progress"
-                style={{
-                  width: `${(
-                    probability * 100
-                  ).toFixed(1)}%`,
-                  background:
-                    result === 1
-                      ? "#dc3545"
-                      : "#28a745",
-                }}
-              >
-                {(probability * 100).toFixed(1)}%
-              </div>
-            </div>
+              <p>
+                The prediction model indicates a higher
+                risk based on the information provided.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2>
+                ✅ Low Risk of Heart Disease
+              </h2>
+
+              <p>
+                The prediction model indicates a lower
+                risk based on the information provided.
+              </p>
+            </>
           )}
         </div>
       )}
 
-      {/* History */}
+      {/* Prediction History */}
       {history.length > 0 && (
         <div className="history-card">
 
@@ -360,20 +366,8 @@ function App() {
                 {" → "}
 
                 {item.prediction === 1
-                  ? " High Risk of Heart Disease"
-                  : " Low Risk of Heart Disease"}
-
-                {item.probability !== null &&
-                  item.probability !== undefined && (
-                    <>
-                      {" "}
-                      (
-                      {(
-                        item.probability * 100
-                      ).toFixed(1)}
-                      %)
-                    </>
-                  )}
+                  ? "High Risk of Heart Disease"
+                  : "Low Risk of Heart Disease"}
               </li>
             ))}
           </ul>
