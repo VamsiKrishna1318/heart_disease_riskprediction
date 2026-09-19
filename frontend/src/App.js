@@ -65,3 +65,4 @@ const handleSubmit = async (e) => {
     alert("Unable to connect to the prediction server.");
   }
 };
+export default App;
