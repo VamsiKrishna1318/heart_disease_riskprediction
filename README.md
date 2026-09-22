@@ -115,11 +115,13 @@ heart_disease_riskprediction/
 ## 📸 Application Screenshots
 
 ### Home Page
-frontend/screenshots/home.png
+
+frontend/screenshots/home_page.png
 
 ### Prediction Form
-frontend/screenshots/prediction.png
+
+frontend/screenshots/prediction_page.png
 
 ### Result Page
-frontend/screenshots/result.png
-``
+
+frontend/screenshots/result_page.png
