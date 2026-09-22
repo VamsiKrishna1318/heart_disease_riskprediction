@@ -6,6 +6,8 @@ A Machine Learning-powered web application that predicts the likelihood of heart
 
 🔗 https://heartdiseaseriskprediction-beta.vercel.app/
 
+Try the application and predict heart disease risk in real time.
+Show more lines
 ---
 
 ## 📌 Project Overview
@@ -88,40 +90,36 @@ The model uses various medical attributes, including:
 | Prediction Type | Binary Classification |
 
 ---
-
 ## 📂 Project Structure
 
 ```text
 heart_disease_riskprediction/
 │
-├── main.py                 # Main application file
-├── train_model.py          # Model training script
-├── new.py                  # Additional prediction/testing script
-├── requirements.txt        # Python dependencies
-├── package.json            # Frontend dependencies
-├── package-lock.json       # Dependency lock file
-├── open.bat                # Windows startup script
+├── frontend/                  # React Frontend
+│   ├── public/                # Static assets
+│   ├── src/                   # React source code
+│   ├── screenshots/           # Project screenshots
+│   ├── package.json
+│   └── package-lock.json
 │
-├── dataset/
-│   └── heart.csv           # Heart disease dataset
-│
-├── models/
-│   └── heart_model.pkl     # Trained ML model
-│
-├── public/
-│   ├── index.html
-│   └── assets/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── App.js
-│   └── index.js
-│
-├── screenshots/
-│   ├── home_page.png
-│   ├── prediction_page.png
-│   └── result_page.png
-│
-└── README.md               # Project documentation
+├── heart.csv                  # Heart disease dataset
+├── heart_model.pkl            # Trained Logistic Regression model
+├── main.py                    # Backend application
+├── new.py                     # Prediction/testing script
+├── train_model.py             # Model training script
+├── open.bat                   # Windows launcher
+├── requirements.txt           # Python dependencies
+└── README.md                  # Project documentation
 ```
+
+## 📸 Application Screenshots
+
+### Home Page
+!rontend/screenshots/home.png
+
+### Prediction Form
+frontend/screenshots/prediction.png
+
+### Result Page
+frontend/screenshots/result.png
+``
