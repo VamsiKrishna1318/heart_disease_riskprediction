@@ -114,13 +114,14 @@ heart_disease_riskprediction/
 
 ## 📸 Application Screenshots
 
-### Home Page
-### Prediction Form
-### Result Page
+### 🏠 Home Page
 
-![Home Page](https://raw.githubusercontent.com/VamsiKrishna1318/heart_diseaseon/main/frontend/screenshots/home_page.png
+![Home Page](frontend/screenshots/home_page.png)
 
-![Prediction Form](https://raw.githubusercontent.com/VamsiKrishna1318/heart_diseasen/frontend/screenshots/prediction_page.png
+### 📝 Prediction Form
 
-![Result Page](https://raw.githubusercontent.com/VamsiKrishnaase_riskprediction/main/frontend/screenshots/result_page.png
+![Prediction Form](frontend/screenshots/prediction_page.png)
 
+### 📊 Result Page
+
+![Result Page](frontend/screenshots/result_page.png)
