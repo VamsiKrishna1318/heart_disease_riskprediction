@@ -7,7 +7,7 @@ A Machine Learning-powered web application that predicts the likelihood of heart
 🔗 https://heartdiseaseriskprediction-beta.vercel.app/
 
 Try the application and predict heart disease risk in real time.
-Show more lines
+
 ---
 
 ## 📌 Project Overview
