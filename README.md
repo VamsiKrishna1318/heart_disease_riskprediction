@@ -4,8 +4,7 @@ A Machine Learning-powered web application that predicts the likelihood of heart
 
 ## 🚀 Live Demo
 
-🔗 Add your deployed application URL here:
-https://your-app-url
+🔗 https://heartdiseaseriskprediction-beta.vercel.app/
 
 ---
 
@@ -54,7 +53,7 @@ The application allows users to enter medical parameters and instantly receive a
 The model uses various medical attributes, including:
 
 - Age
-- Sex
+- Gender
 - Chest Pain Type
 - Resting Blood Pressure
 - Cholesterol
@@ -91,3 +90,38 @@ The model uses various medical attributes, including:
 ---
 
 ## 📂 Project Structure
+
+```text
+heart_disease_riskprediction/
+│
+├── main.py                 # Main application file
+├── train_model.py          # Model training script
+├── new.py                  # Additional prediction/testing script
+├── requirements.txt        # Python dependencies
+├── package.json            # Frontend dependencies
+├── package-lock.json       # Dependency lock file
+├── open.bat                # Windows startup script
+│
+├── dataset/
+│   └── heart.csv           # Heart disease dataset
+│
+├── models/
+│   └── heart_model.pkl     # Trained ML model
+│
+├── public/
+│   ├── index.html
+│   └── assets/
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── App.js
+│   └── index.js
+│
+├── screenshots/
+│   ├── home_page.png
+│   ├── prediction_page.png
+│   └── result_page.png
+│
+└── README.md               # Project documentation
+```
